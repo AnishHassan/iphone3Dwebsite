@@ -5,8 +5,9 @@ import { pauseImg, playImg, replayImg } from '../utils';
 import { useGSAP } from '@gsap/react';
 
 import { ScrollTrigger } from "gsap/all";
-
 gsap.registerPlugin(ScrollTrigger);
+
+
 
 const VideoCarousel = () => {
     const videoRef = useRef([]);
@@ -104,8 +105,9 @@ const VideoCarousel = () => {
                     restart();
             }
             const animUpdate = () => {
-                anim.progress(videoRef.current[videoId].currentTime / hightlightsSlides[videoId].videoDuration)
-            }
+                if (videoRef.current[videoId]) {
+                    anim.progress(videoRef.current[videoId].currentTime / hightlightsSlides[videoId].videoDuration);
+                }            }
 
             if (isPlaying) {
                 gsap.ticker.add(animUpdate)
