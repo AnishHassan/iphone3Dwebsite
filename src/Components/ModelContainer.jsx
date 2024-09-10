@@ -4,6 +4,8 @@ import Lights from './Lights'
 import * as THREE from 'three'
 import IphoneModel from './IphoneModel'
 import { Html } from '@react-three/drei';
+import Loader from './Loader'
+
 
 const ModelContainer = ({ index, groupRef, gsapType, controlRef, setRotationSize, size, item }) => {
     return (
@@ -16,7 +18,7 @@ const ModelContainer = ({ index, groupRef, gsapType, controlRef, setRotationSize
             <OrbitControls makeDefault ref={controlRef} enableZoom={false}
                 enablePan={false} rotateSpeed={0.4} target={new THREE.Vector3(0, 0, 0)} onEnd={() => setRotationSize(controlRef.current.getAzimuthalAngle())} />
             <group ref={groupRef} name={`${index === 1} ? 'small' : 'large'`} position={[0, 0, 0]}>
-                <Suspense fallback={<Html><div>Loading</div></Html>}>
+                <Suspense fallback={<Html><Loader/></Html>}>
                     <IphoneModel scale={index===1 ? [15,15,15] : [17,17,17]} item={item} size={size}/>
                 </Suspense>
             </group>
